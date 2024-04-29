@@ -1,0 +1,32 @@
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+
+# Executables
+dsa
+
+# Binary files
+*.exe
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Compiled Go packages
+*.test
+
+# Output of the gofmt tool, specifically when used with LiteIDE
+*.fmt
+
+# Output of the go vet tool
+*.vet
+
+# Log files and backups
+*.log
+*.bak
+
+# Go binaries for programs and plugins
+/bin/
