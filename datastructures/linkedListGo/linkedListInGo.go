@@ -78,13 +78,30 @@ func (s *slinkedList) insertAtEnd(userData int) *slinkedList {
 func (s *slinkedList) insertAtIndex(userData int, index int) *slinkedList {
 	node := &snode{data: userData}
 
-	// CHECK IF SLL IS EMPTY
-	if s.head == nil {
-		s.head = node
-	} else {
-		// CHECK IF PROVIDED INDEX IS VALID FOR THE SLL
-		fmt.Print()
+	// CHECK IF PROVIDED INDEX IS VALID FOR THE SLL
+	if index < 0 {
+		fmt.Println("Invalid index provided")
+		return s
 	}
+
+	// CHECK IF SLL IS EMPTY OR INSERTING AT THE BEGINNING
+	if s.head == nil || index == 0 {
+		s.insertAtStart(userData)
+		return s
+	}
+
+	current := s.head
+	for i := 0; i < index-1 && current != nil; i++ {
+		current = current.next
+	}
+
+	if current == nil {
+		fmt.Println("Invalid index provided")
+		return s
+	}
+
+	node.next = current.next
+	current.next = node
 
 	return s
 }
@@ -111,6 +128,8 @@ func SingleLinkedListInGo() {
 	fmt.Println(sll.length())
 
 	// INSERT AT INDEX
+	sll.insertAtIndex(7, 8)
+	sll.displayElements()
 
 	// DELETE AT START
 
