@@ -11,18 +11,19 @@ type slinkedList struct {
 	head *snode
 }
 
-func (s *slinkedList) insertAtStart(userData int) *slinkedList {
-	node := &snode{data: userData} // by default next is set to nil
-
-	// CHECK IF LL IS EMPTY
+func (s *slinkedList) length() int {
 	if s.head == nil {
-		s.head = node
+		return 0
 	} else {
-		node.next = s.head
-		s.head = node
-	}
+		current := s.head
+		length := 0
+		for current != nil {
+			length++
+			current = current.next
+		}
 
-	return s
+		return length
+	}
 }
 
 func (s *slinkedList) displayElements() {
@@ -41,6 +42,53 @@ func (s *slinkedList) displayElements() {
 	}
 }
 
+func (s *slinkedList) insertAtStart(userData int) *slinkedList {
+	node := &snode{data: userData} // by default next is set to nil
+
+	// CHECK IF LL IS EMPTY
+	if s.head == nil {
+		s.head = node
+	} else {
+		node.next = s.head
+		s.head = node
+	}
+
+	return s
+}
+
+func (s *slinkedList) insertAtEnd(userData int) *slinkedList {
+	node := &snode{data: userData}
+
+	// CHECK IF SLL IS EMPTY
+	if s.head == nil {
+		s.head = node
+	} else {
+		current := s.head
+
+		for current.next != nil {
+			current = current.next
+		}
+
+		current.next = node
+	}
+
+	return s
+}
+
+func (s *slinkedList) insertAtIndex(userData int, index int) *slinkedList {
+	node := &snode{data: userData}
+
+	// CHECK IF SLL IS EMPTY
+	if s.head == nil {
+		s.head = node
+	} else {
+		// CHECK IF PROVIDED INDEX IS VALID FOR THE SLL
+		fmt.Print()
+	}
+
+	return s
+}
+
 func SingleLinkedListInGo() {
 	// INITIALIZING A SLL
 	sll := slinkedList{}
@@ -54,8 +102,13 @@ func SingleLinkedListInGo() {
 	sll.displayElements()
 
 	// INSERT AT END
+	sll.insertAtEnd(10)
+	sll.insertAtEnd(9)
+	sll.insertAtEnd(8)
 
-	// INSER AT END
+	sll.displayElements()
+
+	fmt.Println(sll.length())
 
 	// INSERT AT INDEX
 
