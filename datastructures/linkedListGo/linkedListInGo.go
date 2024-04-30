@@ -106,6 +106,87 @@ func (s *slinkedList) insertAtIndex(userData int, index int) *slinkedList {
 	return s
 }
 
+func (s *slinkedList) deleteAtStart() *slinkedList {
+
+	if s.head == nil {
+		fmt.Println("SLL is Empty")
+		return s
+	}
+
+	s.head = s.head.next
+
+	return s
+}
+
+func (s *slinkedList) deleteAtEnd() *slinkedList {
+
+	if s.head == nil {
+		fmt.Println("SLL is empty")
+		return s
+	}
+
+	// If the list has only one node
+	if s.head.next == nil {
+		s.head = nil
+		return s
+	}
+
+	// Find the last node
+	current := s.head
+	for current.next.next != nil {
+		current = current.next
+	}
+
+	// Delete the last node
+	current.next = nil
+
+	return s
+}
+
+func (s *slinkedList) deleteAtIndex(index int) *slinkedList {
+
+	// CHECK IF SLL IS EMPTY
+	if s.head == nil {
+		fmt.Println("SLL is empty")
+		return s
+	}
+
+	if index == 0 {
+		s.head = s.head.next
+		return s
+	}
+
+	current := s.head
+	for i := 0; i < index-1 && current != nil; i++ {
+		current = current.next
+	}
+
+	if current == nil || current.next == nil {
+		fmt.Println("Invalid index")
+		return s
+	}
+
+	current.next = current.next.next
+
+	return s
+}
+
+func (s *slinkedList) updateAtStart() *slinkedList {
+	return s
+}
+
+func (s *slinkedList) updateAtEnd() *slinkedList {
+	return s
+}
+
+func (s *slinkedList) updateAtIndex() *slinkedList {
+	return s
+}
+
+func (s *slinkedList) updateValue() *slinkedList {
+	return s
+}
+
 func SingleLinkedListInGo() {
 	// INITIALIZING A SLL
 	sll := slinkedList{}
@@ -132,12 +213,19 @@ func SingleLinkedListInGo() {
 	sll.displayElements()
 
 	// DELETE AT START
+	sll.deleteAtStart()
+	sll.displayElements()
 
 	// DELETE AT END
+	sll.deleteAtEnd()
+	sll.displayElements()
 
 	// DELETE AT INDEX
+	sll.deleteAtIndex(2)
+	sll.displayElements()
 
 	// LENGTH OF SLL
+	sll.length()
 
 	// UPDATE AT INDEX
 
