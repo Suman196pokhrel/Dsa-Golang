@@ -70,4 +70,4 @@ func TestPromotionFeature() {
 
 // BUT - EMBEDDING IS NOT INHERITANCE
 // strict type checking allows only similar types of variable assignment i.e, varible of type manager cannot be assigned to anyother type
-// there is no dynamic dispatch for concrete types in Go. The methods on the embedded field have no idea they are embedded.
+// there is no dynamic dispatch (Method lookup, method resolution) for concrete types in Go. The methods on the embedded field have no idea they are embedded.
