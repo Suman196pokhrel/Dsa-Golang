@@ -3,12 +3,14 @@ package main
 import (
 	"fmt"
 
-	linkedlistgo "github.com/Suman196pokhrel/Dsa-Golang/datastructures/linkedListGo"
+	"github.com/Suman196pokhrel/Dsa-Golang/algorithms/sorting"
 )
 
 func main() {
 	fmt.Println("Hello DSA")
 
 	// arraysgo.ArrayOperations()
-	linkedlistgo.SingleLinkedListInGo()
+	// linkedlistgo.SingleLinkedListInGo()
+
+	sorting.BubbleSort()
 }
