@@ -171,19 +171,81 @@ func (s *slinkedList) deleteAtIndex(index int) *slinkedList {
 	return s
 }
 
-func (s *slinkedList) updateAtStart() *slinkedList {
+func (s *slinkedList) updateAtStart(userData int) *slinkedList {
+
+	// CHECK IF SLL IS EMPTY
+	if s.head == nil {
+		fmt.Println("SLL IS EMPTY , CANNOT UPDATE")
+		return s
+	}
+
+	s.head.data = userData
+
 	return s
 }
 
-func (s *slinkedList) updateAtEnd() *slinkedList {
+func (s *slinkedList) updateAtEnd(userData int) *slinkedList {
+	// CHECK IF SLL IS EMPTY
+	if s.head == nil {
+		fmt.Println("SLL IS EMPTY , CANNOT UPDATE")
+		return s
+	}
+
+	current := s.head
+	for current.next != nil {
+		current = current.next
+	}
+
+	current.data = userData
 	return s
 }
 
-func (s *slinkedList) updateAtIndex() *slinkedList {
+func (s *slinkedList) updateAtIndex(index int, userData int) *slinkedList {
+
+	// CHECK IF SLL IS EMPTY
+	if s.head == nil {
+		fmt.Println("SLL IS EMPTY , CANNOT UPDATE")
+		return s
+	}
+
+	if index == 0 {
+		s.head.data = userData
+		return s
+	}
+
+	if index >= s.length() {
+		fmt.Println("Invalid index , CANNOT UPDATE")
+		return s
+	}
+
+	current := s.head
+	for i := 0; i < index; i++ {
+		current = current.next
+	}
+
+	current.data = userData
+
 	return s
 }
 
-func (s *slinkedList) updateValue() *slinkedList {
+func (s *slinkedList) updateValue(targetElement int, userData int) *slinkedList {
+	if s.head == nil {
+		fmt.Print("SLL IS EMPTY , CANNOT UPDATE")
+		return s
+	}
+
+	current := s.head
+	for current != nil {
+		if current.data == targetElement {
+			current.data = userData
+			return s
+		}
+
+		current = current.next
+	}
+
+	fmt.Println("ELEMENT WAS NOT FOUND IN SLL")
+
 	return s
 }
 
@@ -225,10 +287,21 @@ func SingleLinkedListInGo() {
 	sll.displayElements()
 
 	// LENGTH OF SLL
-	sll.length()
+	fmt.Println(sll.length())
+	// UPDATE FIRST
+	sll.updateAtStart(100)
+	sll.displayElements()
+
+	// UPDATE LAST
+	sll.updateAtEnd(999)
+	sll.displayElements()
 
 	// UPDATE AT INDEX
+	sll.updateAtIndex(2, 222)
+	sll.displayElements()
 
 	// UPDATE FIRST ITEM WITH VALUE
+	sll.updateValue(99999, 2020)
+	sll.displayElements()
 
 }
