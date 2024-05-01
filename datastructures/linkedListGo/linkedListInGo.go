@@ -1,6 +1,15 @@
 package linkedlistgo
 
-import "fmt"
+import (
+	"fmt"
+)
+
+type SortMode string
+
+const (
+	Ascending  SortMode = "ASC"
+	Descending SortMode = "DES"
+)
 
 type snode struct {
 	data int
@@ -41,6 +50,24 @@ func (s *slinkedList) displayElements() {
 		fmt.Println()
 	}
 }
+
+// func (s *slinkedList) String() string {
+// 	// CHECK IF LL IS EMPTY
+// 	if s.head == nil {
+// 		fmt.Println("Single Linked List is Empty")
+// 		return "Single Linked List is Empty"
+
+// 	} else {
+// 		current := s.head
+// 		var output strings.Builder // Using strings.Builder for efficient string concatenation
+// 		for current != nil {
+// 			fmt.Print(current.data, " => ")
+// 			output.WriteString(fmt.Sprintf("%v => ", current.data))
+// 			current = current.next
+// 		}
+// 		return output.String()
+// 	}
+// }
 
 func (s *slinkedList) insertAtStart(userData int) *slinkedList {
 	node := &snode{data: userData} // by default next is set to nil
@@ -249,6 +276,27 @@ func (s *slinkedList) updateValue(targetElement int, userData int) *slinkedList 
 	return s
 }
 
+func (sm SortMode) IsValid() bool {
+	return sm == Ascending || sm == Descending
+}
+
+func (s *slinkedList) sort(mode SortMode) *slinkedList {
+
+	if !mode.IsValid() {
+		fmt.Println("INVALID SORTING MODE")
+		return s
+	}
+
+	if s.head == nil {
+		fmt.Println("SLL IS EMPTY")
+		return s
+	}
+
+	// TODO :BUBBLE SORT IMPLEMENTATION
+
+	return s
+}
+
 func SingleLinkedListInGo() {
 	// INITIALIZING A SLL
 	sll := slinkedList{}
@@ -303,5 +351,7 @@ func SingleLinkedListInGo() {
 	// UPDATE FIRST ITEM WITH VALUE
 	sll.updateValue(99999, 2020)
 	sll.displayElements()
+
+	// PRINTTING OUR CUSTOM TYPE - LIKE DUNDER METHODS IN PYTHON
 
 }
