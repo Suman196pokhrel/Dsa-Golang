@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	advancedgo "github.com/Suman196pokhrel/Dsa-Golang/advanced-go"
+	"github.com/Suman196pokhrel/Dsa-Golang/algorithms/sorting"
 )
 
 func main() {
@@ -12,6 +12,7 @@ func main() {
 	// arraysgo.ArrayOperations()
 	// linkedlistgo.SingleLinkedListInGo()
 
-	// sorting.BubbleSort()
-	advancedgo.TestPromotionFeature()
+	sorting.BubbleSort()
+	// advancedgo.TestPromotionFeature()
+
 }
