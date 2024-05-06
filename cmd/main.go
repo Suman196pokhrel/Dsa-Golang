@@ -14,6 +14,7 @@ func main() {
 
 	// sorting.BubbleSort()
 	// advancedgo.TestPromotionFeature()
-	advancedgo.InterfaceUseCase()
+	// advancedgo.InterfaceUseCase()
+	advancedgo.ErrorsInGo()
 
 }
