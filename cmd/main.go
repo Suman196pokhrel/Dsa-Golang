@@ -10,7 +10,8 @@ func main() {
 	fmt.Println("Hello DSA")
 
 	// arraysgo.ArrayOperations()
-	linkedlistgo.SingleLinkedListInGo()
+	// linkedlistgo.SingleLinkedListInGo()
+	linkedlistgo.DoubleLinkedListInGo()
 
 	// sorting.BubbleSort()
 	// advancedgo.TestPromotionFeature()
