@@ -1,6 +1,7 @@
 package linkedlistgo
 
 import (
+	"errors"
 	"fmt"
 )
 
@@ -280,6 +281,20 @@ func (sm SortMode) IsValid() bool {
 	return sm == Ascending || sm == Descending
 }
 
+func (s *slinkedList) swapAdjacentNodes(indexOfFirstNode int) error {
+	if indexOfFirstNode < 0 || indexOfFirstNode >= s.length()-1 {
+		return errors.New("index out of range")
+	}
+
+	current := s.head
+	for i := 0; i < indexOfFirstNode; i++ {
+		current = current.next
+	}
+
+	current.data, current.next.data = current.next.data, current.data
+	return nil
+}
+
 func (s *slinkedList) sort(mode SortMode) *slinkedList {
 
 	if !mode.IsValid() {
@@ -293,16 +308,23 @@ func (s *slinkedList) sort(mode SortMode) *slinkedList {
 	}
 
 	// TODO :BUBBLE SORT IMPLEMENTATION
-	current := s.head
-	n := s.length()
+	var sorted bool
+	var lastSwapped *snode = nil
+	for !sorted {
+		sorted = true
+		prev := s.head
+		current := s.head.next
 
-	for i := 0; i < n-1; i++ {
-		for j := 0; j < n-i-1; j++ {
-			if current.data > current.next.data {
-				// SWAP TWO NODES
-
+		for current != lastSwapped {
+			if prev.data > current.data {
+				// Swap data of adjacent nodes
+				prev.data, current.data = current.data, prev.data
+				sorted = false // Set sorted to false to indicate that a swap occurred
 			}
+			prev = current
+			current = current.next
 		}
+		lastSwapped = prev // Update lastSwapped to optimize next pass
 	}
 
 	return s
@@ -334,15 +356,15 @@ func SingleLinkedListInGo() {
 	sll.displayElements()
 
 	// DELETE AT START
-	sll.deleteAtStart()
+	// sll.deleteAtStart()
 	sll.displayElements()
 
 	// DELETE AT END
-	sll.deleteAtEnd()
+	// sll.deleteAtEnd()
 	sll.displayElements()
 
 	// DELETE AT INDEX
-	sll.deleteAtIndex(2)
+	// sll.deleteAtIndex(2)
 	sll.displayElements()
 
 	// LENGTH OF SLL
@@ -363,6 +385,8 @@ func SingleLinkedListInGo() {
 	sll.updateValue(99999, 2020)
 	sll.displayElements()
 
-	// PRINTTING OUR CUSTOM TYPE - LIKE DUNDER METHODS IN PYTHON
+	// SORTING SLL
+	sll.sort(Ascending)
+	sll.displayElements()
 
 }
