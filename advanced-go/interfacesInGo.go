@@ -39,6 +39,8 @@ func InterfaceUseCase() {
 	}
 
 	for _, v := range vehicles {
+
+		// STANDARD TYPE SWITCH SYNTAX TO CHECK TYPES
 		switch v.(type) {
 		case *Car:
 			c := v.(*Car)
