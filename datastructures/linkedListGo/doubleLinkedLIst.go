@@ -83,9 +83,20 @@ func (dll *dLinkedList) insertAtEnd(userData int) {
 
 func (dll *dLinkedList) insertInIndex(insertIndex int, userData int) {
 
-	if dll.head == nil {
-		fmt.Printf("Double LinkedList is empty ! inserting at first")
+	if insertIndex < 0 {
+		fmt.Println("Index cannot be negative")
+		return
+	}
+
+	if dll.head == nil || insertIndex == 0 {
+		fmt.Println("Double LinkedList is empty ! inserting at first")
 		dll.insertAtBeginning(userData)
+		return
+	}
+
+	if insertIndex >= dll.length() {
+		fmt.Println("Given index is out of range , inserting at end")
+		dll.insertAtEnd(userData)
 		return
 	}
 
@@ -103,8 +114,9 @@ func (dll *dLinkedList) insertInIndex(insertIndex int, userData int) {
 	node.prev = current
 
 	// AFTER NODE
-	current.next.prev = &node
-
+	if current.next != nil {
+		current.next.prev = &node
+	}
 	// BEFORE NODE
 	current.next = &node
 }
@@ -113,23 +125,18 @@ func DoubleLinkedListInGo() {
 	dll := dLinkedList{}
 
 	// INSERT AT START
-	dll.insertAtBeginning(11)
-	dll.insertAtBeginning(12)
-	dll.insertAtBeginning(13)
-	dll.insertAtBeginning(14)
-	dll.insertAtBeginning(15)
-	dll.displayElements()
 
-	fmt.Println("LENGTH => ", dll.length())
+	for i := 0; i < 5; i++ {
+		dll.insertAtBeginning(i)
+	}
+	dll.displayElements()
 
 	dll.insertAtEnd(10)
 	dll.displayElements()
-	fmt.Println("LENGTH => ", dll.length())
 
 	// dll.insertAtEnd(10)
 
-	dll.insertInIndex(2, 222)
+	dll.insertInIndex(5, 222)
 	dll.displayElements()
-	fmt.Println("LENGTH => ", dll.length())
 
 }
