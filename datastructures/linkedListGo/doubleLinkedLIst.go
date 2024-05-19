@@ -43,6 +43,27 @@ func (dll *dLinkedList) insertAtBeginning(userData int) {
 
 	node.next = dll.head
 	dll.head = node
+}
+
+func (dll *dLinkedList) insertAtEnd(userData int) {
+
+	if dll.head == nil {
+		fmt.Println("Double LinkedList is empty ! , inserting at start")
+		dll.insertAtBeginning(userData)
+		return
+	} else {
+		node := dnode{data: userData}
+		current := dll.head
+
+		for current.next != nil {
+			current = current.next
+		}
+
+		node.prev = current
+		current.next = &node
+
+		return
+	}
 
 }
 
@@ -56,5 +77,9 @@ func DoubleLinkedListInGo() {
 	dll.insertAtBeginning(14)
 	dll.insertAtBeginning(15)
 	dll.displayElements()
+
+	dll.insertAtEnd(10)
+	dll.displayElements()
+	// dll.insertAtEnd(10)
 
 }
