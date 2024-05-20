@@ -27,12 +27,40 @@ func (n *Node) Insert(newValue int) {
 	}
 }
 
+func (n *Node) Search(value int) bool {
+	if n == nil {
+		return false
+	}
+
+	if value < n.value {
+		// MOVE LEFT
+		return n.left.Search(value)
+	} else if value > n.value {
+		// MOVE RIGHT
+		return n.right.Search(value)
+	}
+
+	return true // Value found at current node
+}
+
 func BSTDemo() {
+
+	// INITIALIZE A NODE (BECOMES THE ROOT NOE)
 	tree := &Node{value: 100}
+
+	// INSERT
 	tree.Insert(50)
 	tree.Insert(200)
 	tree.Insert(300)
+	tree.Insert(100)
+	tree.Insert(10)
+	tree.Insert(20)
+
+	tree.Insert(400)
 
 	fmt.Println(tree)
+
+	// SEARCH
+	fmt.Println(tree.Search(22))
 
 }
