@@ -165,7 +165,41 @@ func (dll *dLinkedList) updateAtIndex(insertIndex int, userData int) {
 	}
 
 	current.data = userData
+}
 
+func (dll *dLinkedList) deleteAtIndex(nodeIndex int) {
+	if dll.head == nil {
+		fmt.Println("Double linkedlist is empty")
+		return
+	}
+
+	// DELETE FIRST NODE
+	if nodeIndex == 0 {
+		dll.head = dll.head.next
+		dll.head.prev = nil
+		return
+	}
+
+	current := dll.head
+	for i := 0; i < nodeIndex-1; i++ {
+		if current.next == nil {
+			fmt.Println("Index out of range")
+			return
+		}
+		current = current.next
+	}
+
+	// current now points to the node just before the one to be deleted
+	if current.next == nil {
+		fmt.Println("Index out of range")
+		return
+	}
+
+	toDelete := current.next
+	current.next = toDelete.next
+	if toDelete.next != nil {
+		toDelete.next.prev = current
+	}
 }
 
 func DoubleLinkedListInGo() {
@@ -185,6 +219,10 @@ func DoubleLinkedListInGo() {
 	dll.updateStart(1919)
 	dll.updateEnd(10000)
 	dll.updateAtIndex(6, 3434)
+	dll.displayElements()
+
+	// DELETE
+	dll.deleteAtIndex(6)
 	dll.displayElements()
 
 }
