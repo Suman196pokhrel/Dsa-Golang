@@ -165,7 +165,6 @@ func (dll *dLinkedList) updateAtIndex(insertIndex int, userData int) {
 	}
 
 	current.data = userData
-	return
 
 }
 
