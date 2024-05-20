@@ -121,22 +121,45 @@ func (dll *dLinkedList) insertInIndex(insertIndex int, userData int) {
 	current.next = &node
 }
 
+func (dll *dLinkedList) updateStart(userData int) {
+	if dll.head == nil {
+		fmt.Println("Double Linked List is empty!")
+		return
+	}
+
+	dll.head.data = userData
+}
+
+func (dll *dLinkedList) updateEnd(userData int) {
+	if dll.head == nil {
+		fmt.Println("Double Linked List is empty!")
+		return
+	}
+
+	current := dll.head
+	for current.next != nil {
+		current = current.next
+	}
+	current.data = userData
+
+}
+
 func DoubleLinkedListInGo() {
 	dll := dLinkedList{}
 
-	// INSERT AT START
-
+	// INSERTS
 	for i := 0; i < 5; i++ {
 		dll.insertAtBeginning(i)
 	}
 	dll.displayElements()
-
 	dll.insertAtEnd(10)
 	dll.displayElements()
-
-	// dll.insertAtEnd(10)
-
 	dll.insertInIndex(5, 222)
+	dll.displayElements()
+
+	// UPDATE
+	dll.updateStart(1919)
+	dll.updateEnd(10000)
 	dll.displayElements()
 
 }
