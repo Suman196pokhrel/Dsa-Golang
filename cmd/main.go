@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	linkedlistgo "github.com/Suman196pokhrel/Dsa-Golang/datastructures/linkedListGo"
+	"github.com/Suman196pokhrel/Dsa-Golang/datastructures/trees"
 )
 
 func main() {
@@ -11,7 +11,8 @@ func main() {
 
 	// arraysgo.ArrayOperations()
 	// linkedlistgo.SingleLinkedListInGo()
-	linkedlistgo.DoubleLinkedListInGo()
+	// linkedlistgo.DoubleLinkedListInGo()
+	trees.BSTDemo()
 
 	// sorting.BubbleSort()
 	// advancedgo.TestPromotionFeature()
