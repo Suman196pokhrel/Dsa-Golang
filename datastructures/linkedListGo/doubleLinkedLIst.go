@@ -141,6 +141,31 @@ func (dll *dLinkedList) updateEnd(userData int) {
 		current = current.next
 	}
 	current.data = userData
+}
+
+func (dll *dLinkedList) updateAtIndex(insertIndex int, userData int) {
+	if insertIndex < 0 {
+		fmt.Println("Index cannot be negative")
+		return
+	}
+
+	if insertIndex == 0 {
+		dll.updateStart(userData)
+		return
+	}
+
+	if insertIndex >= dll.length() {
+		fmt.Println("Index cannot be greater than the length of double linkedlist")
+		return
+	}
+
+	current := dll.head
+	for i := 0; i < insertIndex; i++ {
+		current = current.next
+	}
+
+	current.data = userData
+	return
 
 }
 
@@ -160,6 +185,7 @@ func DoubleLinkedListInGo() {
 	// UPDATE
 	dll.updateStart(1919)
 	dll.updateEnd(10000)
+	dll.updateAtIndex(6, 3434)
 	dll.displayElements()
 
 }
