@@ -10,57 +10,89 @@ type Node struct {
 
 func (n *Node) Insert(newValue int) {
 	if newValue <= n.value {
-		// IF NEW VALUE IS SMALLER MOVE LEFT
+		// MOVE TO LEFT NODE
 		if n.left == nil {
 			n.left = &Node{value: newValue}
+			return
 		} else {
 			n.left.Insert(newValue)
 		}
 
 	} else if newValue >= n.value {
-		// IF NEW VLAUE LARGER MIVR RIGHT
+		// MOVE TO RIGHT NODE
 		if n.right == nil {
 			n.right = &Node{value: newValue}
+			return
 		} else {
 			n.right.Insert(newValue)
 		}
 	}
 }
 
-func (n *Node) Search(value int) bool {
-	if n == nil {
-		return false
+func (n *Node) SearchRecursive(searchVal int) bool {
+
+	if searchVal < n.value {
+		// MOVE TO LEFT NODE
+		if n.left == nil {
+			return false
+		} else {
+			return n.left.SearchRecursive(searchVal)
+		}
+	} else if searchVal > n.value {
+		// MOVE TO RIGHT NODE
+		if n.right == nil {
+			return false
+		} else {
+			return n.right.SearchRecursive(searchVal)
+		}
 	}
 
-	if value < n.value {
-		// MOVE LEFT
-		return n.left.Search(value)
-	} else if value > n.value {
-		// MOVE RIGHT
-		return n.right.Search(value)
+	return true
+}
+
+func (n *Node) SearchNonRecursive(searchVal int) bool {
+	current := n
+
+	for current != nil {
+		if searchVal < current.value {
+			current = current.left
+		} else if searchVal > current.value {
+			current = current.right
+		} else {
+			return true
+		}
 	}
 
-	return true // Value found at current node
+	return false
 }
 
 func BSTDemo() {
-
-	// INITIALIZE A NODE (BECOMES THE ROOT NOE)
-	tree := &Node{value: 100}
+	tree := &Node{
+		value: 500,
+	}
 
 	// INSERT
-	tree.Insert(50)
-	tree.Insert(200)
-	tree.Insert(300)
-	tree.Insert(100)
-	tree.Insert(10)
-	tree.Insert(20)
+	tree.Insert(250)
+	tree.Insert(750)
 
-	tree.Insert(400)
+	// Depth 2
+	tree.Insert(125)
+	tree.Insert(375)
+	tree.Insert(625)
+	tree.Insert(875)
 
-	fmt.Println(tree)
+	// Depth 3
+	tree.Insert(62)
+	tree.Insert(187)
+	tree.Insert(312)
+	tree.Insert(437)
+	tree.Insert(562)
+	tree.Insert(687)
+	tree.Insert(812)
+	tree.Insert(937)
 
 	// SEARCH
-	fmt.Println(tree.Search(22))
+	fmt.Println(tree.SearchRecursive(562222))
+	fmt.Println(tree.SearchNonRecursive(562222)) // PREVENTS STACK OVERFLOW
 
 }
