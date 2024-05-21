@@ -1,6 +1,8 @@
 package trees
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Node struct {
 	value int
@@ -66,6 +68,49 @@ func (n *Node) SearchNonRecursive(searchVal int) bool {
 	return false
 }
 
+func (n *Node) DeleteNode(value int) {
+
+}
+
+func (n *Node) InOrderTraversal() {
+	if n != nil {
+		n.left.InOrderTraversal()
+		fmt.Println(n.value)
+		n.right.InOrderTraversal()
+	}
+
+}
+
+func (n *Node) PreOrderTraversal() {
+	if n != nil {
+		fmt.Println(n.value)
+		n.left.InOrderTraversal()
+		n.right.InOrderTraversal()
+	}
+
+}
+
+func (n *Node) PostOrderTraversal() {
+	if n != nil {
+		n.left.InOrderTraversal()
+		n.right.InOrderTraversal()
+		fmt.Println(n.value)
+
+	}
+
+}
+
+// PrintBSTWithLevel prints the BST with each node's value and its level
+func PrintBSTWithLevel(root *Node, level int) {
+	if root == nil {
+		return
+	}
+
+	PrintBSTWithLevel(root.left, level+1)
+	fmt.Printf("Level %d: %d\n", level, root.value)
+	PrintBSTWithLevel(root.right, level+1)
+}
+
 func BSTDemo() {
 	tree := &Node{
 		value: 500,
@@ -94,5 +139,8 @@ func BSTDemo() {
 	// SEARCH
 	fmt.Println(tree.SearchRecursive(562222))
 	fmt.Println(tree.SearchNonRecursive(562222)) // PREVENTS STACK OVERFLOW
+
+	// tree.InOrderTraversal()
+	PrintBSTWithLevel(tree, 0)
 
 }
