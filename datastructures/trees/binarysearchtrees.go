@@ -68,10 +68,6 @@ func (n *Node) SearchNonRecursive(searchVal int) bool {
 	return false
 }
 
-func (n *Node) DeleteNode(value int) {
-
-}
-
 func (n *Node) InOrderTraversal() {
 	if n != nil {
 		n.left.InOrderTraversal()
@@ -111,6 +107,56 @@ func PrintBSTWithLevel(root *Node, level int) {
 	PrintBSTWithLevel(root.right, level+1)
 }
 
+func findSmallest(n *Node) *Node {
+	current := n
+
+	if current.left != nil {
+		current = current.left
+	}
+
+	return current
+}
+
+func (n *Node) DeleteNode(value int) *Node {
+
+	if n == nil {
+		return nil
+	}
+
+	// Step 1 :  Find the node to be deleted
+	if value < n.value {
+		n.left = n.left.DeleteNode(value)
+	} else if value > n.value {
+		n.right = n.right.DeleteNode(value)
+	} else {
+		// NODE TO BE DELETED FOUND
+
+		// CASE 1 : Node is a leaf node
+		if n.left == nil && n.right == nil {
+			return nil
+		}
+
+		// CASE 2 : Node has one child
+		if n.left == nil {
+			return n.right
+		} else if n.right == nil {
+			return n.left
+		}
+
+		// CASE 3 : Node has two children
+		// Find the inorder successor (smallest in the right subtreee)
+		minRight := findSmallest(n.right)
+		// replace the mod's value with the successor's value
+		n.value = minRight.value
+		// DEELTE the successor
+		n.right = n.right.DeleteNode(minRight.value)
+
+	}
+
+	return n
+
+}
+
 func BSTDemo() {
 	tree := &Node{
 		value: 500,
@@ -140,7 +186,10 @@ func BSTDemo() {
 	fmt.Println(tree.SearchRecursive(562222))
 	fmt.Println(tree.SearchNonRecursive(562222)) // PREVENTS STACK OVERFLOW
 
-	// tree.InOrderTraversal()
-	PrintBSTWithLevel(tree, 0)
+	// PrintBSTWithLevel(tree, 0)
 
+	// NOTE : Inorder traversal always gives you a sorted sequence of values
+	// tree.InOrderTraversal()
+
+	tree.PostOrderTraversal()
 }
